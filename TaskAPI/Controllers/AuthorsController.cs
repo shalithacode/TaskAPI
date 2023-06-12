@@ -16,10 +16,10 @@ namespace TaskAPI.Controllers
             _authorService = authorRepository;
             _mapper = mapper;
         }
-        [HttpGet()]
-        public ActionResult<ICollection<AuthorDto>> GetAuthors()
+        [HttpGet]
+        public ActionResult<ICollection<AuthorDto>> GetAuthors([FromQuery]string job = "", [FromQuery] string search = "")
         {
-            var authors = _authorService.GetAllAuthors();
+            var authors = _authorService.GetAllAuthors(job, search);
             
             var authorsDto = _mapper.Map<ICollection<AuthorDto>>(authors);
 
